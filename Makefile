@@ -1,35 +1,57 @@
-NAME = pipex
+NAME		=	pipex
 
-SRC = ft_split.c \
-	ft_strjoin.c \
-	ft_strlen.c \
-	ft_strncmp.c \
-	errors.c \
-	main.c \
-	pipex_utils.c
+NAME_BONUS	=	pipex_bonus
 
-HEADER = pipex.h
+SRC			=	mand/ft_split.c \
+				mand/ft_strjoin.c \
+				mand/ft_strlen.c \
+				mand/ft_strncmp.c \
+				mand/errors.c \
+				mand/main.c \
+				mand/pipex_utils.c \
 
-OBJ = $(SRC:c=o)
+SRC_BONUS	=	get_next_line/get_next_line.c \
+				get_next_line/get_next_line_utils.c \
+				bonus/errors_bonus.c \
+				bonus/ft_split.c \
+				bonus/ft_strjoin.c \
+				bonus/ft_strlen.c \
+				bonus/ft_strncmp.c \
+				bonus/limiter_part_bonus.c \
+				bonus/main_bonus.c \
+				bonus/pipex_utils_bonus.c \
 
-CC = gcc
+HEADER		=	pipex.h
 
-FLAGS = -Wall -Wextra -Werror
+OBJ			=	$(SRC:c=o)
 
-all: $(NAME)
+OBJ_BONUS	=	$(SRC_BONUS:c=o)
 
-$(NAME): $(OBJ) $(HEADER)
+CC			=	cc
+
+FLAGS		=	-Wall -Wextra -Werror
+
+all:			$(NAME)
+
+$(NAME):		$(OBJ) $(HEADER)
 	$(CC) $(FLAGS) -o $(NAME) $(OBJ)
 
-%.o: %.c $(HEADER)
+$(NAME_BONUS):	$(OBJ_BONUS) $(HEADER)
+	$(CC) $(FLAGS) -o $(NAME_BONUS) $(OBJ_BONUS)
+
+%.o:			%.c $(HEADER)
 	$(CC) $(FLAGS) -c $< -o $@
 
-clean	:
+bonus:			$(NAME_BONUS)
+
+clean:
 	@rm -f $(OBJ)
+	@rm -f $(OBJ_BONUS)
 
-fclean	:	clean
-	@rm $(NAME)
+fclean:			clean
+	@rm -f $(NAME)
+	@rm -f $(NAME_BONUS)
 
-re	: fclean all
+re:				fclean all
 
-.PHONY: clean fclean re
+.PHONY:			clean fclean re
